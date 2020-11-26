@@ -1,14 +1,40 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DBManager {
+    static private DBManager instance = null;
+
     private ArrayList<RegisteredUser> users;
     private ArrayList<Ticket> tickets;
     private ArrayList<Coupon> coupons;
+    private ArrayList<Payment> payments;
 
     private Theatre theatre;
+    private HashMap<Integer, Double> creditCards;
+
     private ArrayList<Movie> movies;
     private ArrayList<ShowTime> showTimes;
     private ArrayList<Seat> seats;
+
+    static public DBManager getInstance() {
+        if (instance == null) {
+            instance = new DBManager();
+        }
+        return instance;
+    }
+
+    public DBManager() {
+        // Get Data from Database
+        users = new ArrayList<RegisteredUser>();
+        tickets = new ArrayList<Ticket>();
+        coupons = new ArrayList<Coupon>();
+        creditCards = new HashMap<Integer, Double>();
+        movies = new ArrayList<Movie>();
+        showTimes = new ArrayList<ShowTime>();
+        seats = new ArrayList<Seat>();
+        payments = new ArrayList<Payment>();
+        theatre = new Theatre("MyTheatre", new Address(1234, "street", "U4K7I2", "calgary", "alberta", "CA"), movies);
+    }
 
     public RegisteredUser getUser(String email) {
         for (RegisteredUser u : users) {
@@ -48,6 +74,10 @@ public class DBManager {
             }
         }
         return null;
+    }
+
+    public void addPayment(Payment payment) {
+        payments.add(payment);
     }
 
     public void addTicket(Ticket ticket) {
