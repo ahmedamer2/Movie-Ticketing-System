@@ -4,18 +4,28 @@ public class Movie {
     private String title;
     private String genre;
     private String synopsys;
+    private boolean isReleased;
     private ArrayList<ShowTime> showTimeList;
 
     public Movie(String title, String genre, String synopsys) {
         this.title = title;
         this.genre = genre;
         this.synopsys = synopsys;
+        isReleased = false;
         showTimeList = new ArrayList<ShowTime>();
     }
 
     // Getters and Setters
     public String getTitle() {
         return title;
+    }
+
+    public void releaseMovie() {
+        isReleased = true;
+    }
+
+    public boolean isReleased() {
+        return isReleased;
     }
 
     public void setTitle(String title) {
