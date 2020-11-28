@@ -1,3 +1,7 @@
+package controller;
+
+import model.RegisteredUser;
+
 public class AuthenticationSystem {
     public RegisteredUser verifyCredentials(String email, String pass) {
         DBManager db = DBManager.getInstance();

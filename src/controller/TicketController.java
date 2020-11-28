@@ -1,4 +1,7 @@
+package controller;
+
 import java.util.ArrayList;
+import model.*;
 
 public class TicketController {
     private ArrayList<Ticket> ticketList;

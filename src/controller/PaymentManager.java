@@ -1,4 +1,7 @@
+package controller;
+
 import java.util.ArrayList;
+import model.Payment;
 
 public class PaymentManager {
     ArrayList<Payment> theatrePayments;

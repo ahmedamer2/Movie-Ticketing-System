@@ -1,3 +1,5 @@
+package model;
+
 public class Coupon {
     private double value;
     private String couponID;

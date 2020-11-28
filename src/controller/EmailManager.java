@@ -1,3 +1,8 @@
+package controller;
+
+import model.Coupon;
+import model.Ticket;
+
 public class EmailManager {
     public void emailTicketPurchase(String email, Ticket ticket) {
         // implement this

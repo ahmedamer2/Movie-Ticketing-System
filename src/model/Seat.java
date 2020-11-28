@@ -1,3 +1,5 @@
+package model;
+
 public class Seat {
     private ShowTime showTime;
     private int row;

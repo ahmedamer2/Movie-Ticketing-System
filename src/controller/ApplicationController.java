@@ -1,7 +1,10 @@
+package controller;
+
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import view.*;
+import model.*;
 
 public class ApplicationController {
     TicketController tc;

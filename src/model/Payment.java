@@ -1,3 +1,5 @@
+package model;
+
 public class Payment {
     private double amount;
     private int senderCardID;

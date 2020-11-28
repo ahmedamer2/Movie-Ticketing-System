@@ -1,4 +1,5 @@
-package view;
+package model;
+
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -9,6 +10,14 @@ public class Movie {
     private boolean isReleased;
     private ImageIcon poster;
     private ArrayList<ShowTime> showTimeList;
+
+    public Movie(String title, String genre, String synopsys) {
+        this.title = title;
+        this.genre = genre;
+        this.synopsys = synopsys;
+        isReleased = false;
+        showTimeList = new ArrayList<ShowTime>();
+    }
 
     public Movie(String title, String genre, String synopsys, String posterLocation) {
         this.title = title;
@@ -51,15 +60,16 @@ public class Movie {
     public void setSynopsys(String synopsys) {
         this.synopsys = synopsys;
     }
-    
-    public ImageIcon getPoster(){
+
+    public ImageIcon getPoster() {
         return poster;
     }
-    
-    public void setPoster(ImageIcon newPoster){//add from loaded image
+
+    public void setPoster(ImageIcon newPoster) {// add from loaded image
         poster = newPoster;
     }
-    public void setPoster(String newPosterLocation){//add from file system
+
+    public void setPoster(String newPosterLocation) {// add from file system
         poster = new ImageIcon(newPosterLocation);
     }
 
