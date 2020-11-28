@@ -38,8 +38,8 @@ public class DBManager {
         creditCards = new HashMap<Integer, Double>();
 
         movies = new ArrayList<Movie>();
-        movies.add(new Movie("Movie1", "genre", "description"));
-        movies.add(new Movie("Movie2", "genre", "another description"));
+        movies.add(new Movie("Movie1", "genre", "description",""));
+        movies.add(new Movie("Movie2", "genre", "another description",""));
 
         showTimes = new ArrayList<ShowTime>();
         showTimes.add(new ShowTime(LocalDateTime.now(), 1, 2, movies.get(0)));

@@ -11,13 +11,6 @@ public class Movie {
     private ImageIcon poster;
     private ArrayList<ShowTime> showTimeList;
 
-    public Movie(String title, String genre, String synopsys) {
-        this.title = title;
-        this.genre = genre;
-        this.synopsys = synopsys;
-        isReleased = false;
-        showTimeList = new ArrayList<ShowTime>();
-    }
 
     public Movie(String title, String genre, String synopsys, String posterLocation) {
         this.title = title;

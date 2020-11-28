@@ -1,7 +1,13 @@
 package controller;
 
 import java.util.ArrayList;
+
+import javax.swing.event.MouseInputAdapter;
+import javax.swing.event.MouseInputListener;
+
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import view.*;
 import model.*;
@@ -94,7 +100,35 @@ public class ApplicationController {
 
     public void browseMovies() {
         MovieView movieView = vc.createMovieView(movieList);
+
+        movieView.addBackListener(new MouseInputAdapter(){
+            public void mouseClicked(MouseEvent e){
+                mainAppView();
+            }
+        });
+
+        ArrayList<MouseListener> events = new ArrayList<MouseListener>();
+
+        for(int i = 0; i<movieList.size() ; i++ ){
+            int index = i;
+            events.add(new MouseInputAdapter(){
+                public void mouseClicked(MouseEvent e){
+                    Movie selectedMovie = movieView.getMovie(index);
+                    browseShowtimes(selectedMovie);
+                }
+            });
+        }
+
+        movieView.addMovieListners(events);
+        
+           
     }
+    
+    public void browseShowtimes(Movie selectedMovie){
+        //TODO
+        System.out.println(selectedMovie.getTitle());
+    }
+
 
     public void mainAppView() {
         MainAppView app = vc.createAppView();
