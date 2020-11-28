@@ -3,8 +3,8 @@ public class AuthenticationSystem {
         DBManager db = DBManager.getInstance();
         RegisteredUser user = db.getUser(email);
         if (user == null || !user.getPassword().equals(pass))
-            return user;
-        return null;
+            return null;
+        return user;
     }
 
     public boolean registerNewUser(RegisteredUser user) {

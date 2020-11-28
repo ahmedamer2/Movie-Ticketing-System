@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,12 +27,27 @@ public class DBManager {
     public DBManager() {
         // Get Data from Database
         users = new ArrayList<RegisteredUser>();
+        users.add(new RegisteredUser("user1@test.com", "user1pass", "User", "1"));
+        users.add(new RegisteredUser("person2@test.com", "person2pass", "Person", "2"));
+
         tickets = new ArrayList<Ticket>();
         coupons = new ArrayList<Coupon>();
         creditCards = new HashMap<Integer, Double>();
+
         movies = new ArrayList<Movie>();
+        movies.add(new Movie("Movie1", "genre", "description"));
+        movies.add(new Movie("Movie2", "genre", "another description"));
+
         showTimes = new ArrayList<ShowTime>();
+        showTimes.add(new ShowTime(LocalDateTime.now(), 1, 2, movies.get(0)));
+        showTimes.add(new ShowTime(LocalDateTime.now(), 1, 2, movies.get(1)));
+
         seats = new ArrayList<Seat>();
+        seats.add(new Seat(0, 0, 20, showTimes.get(0)));
+        seats.add(new Seat(0, 1, 20, showTimes.get(0)));
+        seats.add(new Seat(0, 0, 20, showTimes.get(1)));
+        seats.add(new Seat(0, 1, 20, showTimes.get(1)));
+
         payments = new ArrayList<Payment>();
         theatre = new Theatre("MyTheatre", new Address(1234, "street", "U4K7I2", "calgary", "alberta", "CA"), movies);
     }
@@ -103,5 +119,17 @@ public class DBManager {
 
     public ArrayList<Seat> getSeats(ShowTime show) {
         return show.getSeatList();
+    }
+
+    public ArrayList<Coupon> getCoupons() {
+        return coupons;
+    }
+
+    public ArrayList<Payment> getPayments() {
+        return payments;
+    }
+
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
     }
 }

@@ -2,21 +2,24 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ShowTime {
+    private Movie movie;
     private LocalDateTime startTime;
+    private int rowCapacity;
+    private int colCapacity;
     private ArrayList<Seat> seatList;
 
-    public ShowTime(LocalDateTime startTime, ArrayList<Seat> seatList) {
+    public ShowTime(LocalDateTime startTime, int rowCapacity, int colCapacity, Movie m) {
         this.startTime = startTime;
-        this.seatList = seatList;
+        this.rowCapacity = rowCapacity;
+        this.colCapacity = colCapacity;
+        this.movie = m;
+        m.addShowTime(this);
+        seatList = new ArrayList<Seat>();
     }
 
     // Getters and Setters
     public ArrayList<Seat> getSeatList() {
         return seatList;
-    }
-
-    public void setSeatList(ArrayList<Seat> seatList) {
-        this.seatList = seatList;
     }
 
     public LocalDateTime getStartTime() {
@@ -25,5 +28,14 @@ public class ShowTime {
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void addSeat(Seat s) {
+        if (s.getRow() < rowCapacity && s.getCol() < colCapacity)
+            seatList.add(s);
     }
 }

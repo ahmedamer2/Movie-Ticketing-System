@@ -6,11 +6,11 @@ public class Movie {
     private String synopsys;
     private ArrayList<ShowTime> showTimeList;
 
-    public Movie(String title, String genre, String synopsys, ArrayList<ShowTime> showTimeList) {
+    public Movie(String title, String genre, String synopsys) {
         this.title = title;
         this.genre = genre;
         this.synopsys = synopsys;
-        this.showTimeList = showTimeList;
+        showTimeList = new ArrayList<ShowTime>();
     }
 
     // Getters and Setters
@@ -42,8 +42,8 @@ public class Movie {
         return showTimeList;
     }
 
-    public void setShowTimeList(ArrayList<ShowTime> showTimeList) {
-        this.showTimeList = showTimeList;
+    public void addShowTime(ShowTime st) {
+        showTimeList.add(st);
     }
 
     @Override
