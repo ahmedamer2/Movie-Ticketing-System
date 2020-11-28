@@ -1,10 +1,13 @@
 package controller;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import view.*;
+import model.Movie;
 
 public class MyViewController {
     JFrame mainFrame;
@@ -28,6 +31,24 @@ public class MyViewController {
         mainFrame.add(register);
         mainFrame.pack();
         return register;
+    }
+
+    public MainAppView createAppView() {
+        removeCurrentPanel();
+        MainAppView app = new MainAppView();
+        currentPanel = app;
+        mainFrame.add(app);
+        mainFrame.pack();
+        return app;
+    }
+
+    public MovieView createMovieView(ArrayList<Movie> movies) {
+        removeCurrentPanel();
+        MovieView movieView = new MovieView(movies);
+        currentPanel = movieView;
+        mainFrame.add(movieView);
+        mainFrame.pack();
+        return movieView;
     }
 
     public MainView createMainView() {

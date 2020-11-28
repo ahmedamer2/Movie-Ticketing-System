@@ -30,7 +30,7 @@ public class MovieView extends JPanel {
     private int rows;
     private GroupLayout layout;
 
-    MovieView(ArrayList<Movie> movies) {
+    public MovieView(ArrayList<Movie> movies) {
         movieList = movies;
         rows = movieList.size() / 3;
         if (movieList.size() % 3 == 1 || movieList.size() % 3 == 2)
@@ -41,19 +41,19 @@ public class MovieView extends JPanel {
 
         initComponents();
 
-        for (int i = 0; i < movieList.size(); i++) {
-            image_scaller(movieList.get(i).getPoster(), moviesDisplayed[i], 200, 300);
-        }
+        // for (int i = 0; i < movieList.size(); i++) {
+        // image_scaller(movieList.get(i).getPoster(), moviesDisplayed[i], 200, 300);
+        // }
 
     }
 
-    public void image_scaller(ImageIcon icon, JLabel to, int width, int height) {
-        // ImageIcon icon = new ImageIcon(imageLoc);
-        Image img = icon.getImage();
-        Image imgScalled = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        icon = new ImageIcon(imgScalled);
-        to.setIcon(icon);
-    }
+    // public void image_scaller(ImageIcon icon, JLabel to, int width, int height) {
+    // // ImageIcon icon = new ImageIcon(imageLoc);
+    // Image img = icon.getImage();
+    // Image imgScalled = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    // icon = new ImageIcon(imgScalled);
+    // to.setIcon(icon);
+    // }
 
     private void initComponents() {
         // initialize components

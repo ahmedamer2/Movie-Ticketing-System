@@ -39,8 +39,8 @@ public class ApplicationController {
                     vc.displayMessage("A User with these credentials does not exist");
                 } else {
                     currentUser = user;
-                    // Go To Main View (after logging)
                     vc.displayMessage("Login Successful");
+                    mainAppView();
                 }
             }
         });
@@ -88,7 +88,23 @@ public class ApplicationController {
         });
 
         main.addContinueListener((ActionEvent e) -> {
-            System.out.println("view not implemented yet");
+            mainAppView();
+        });
+    }
+
+    public void browseMovies() {
+        MovieView movieView = vc.createMovieView(movieList);
+    }
+
+    public void mainAppView() {
+        MainAppView app = vc.createAppView();
+
+        app.addCancelTicketListener((ActionEvent e) -> {
+            System.out.println("not implemented");
+        });
+
+        app.addMoviesListener((ActionEvent e) -> {
+            browseMovies();
         });
     }
 
