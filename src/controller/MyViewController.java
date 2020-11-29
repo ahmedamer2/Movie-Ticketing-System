@@ -10,6 +10,7 @@ import view.*;
 import model.Movie;
 import model.RegisteredUser;
 import model.Ticket;
+import model.Seat;
 
 public class MyViewController {
     JFrame mainFrame;
@@ -34,6 +35,16 @@ public class MyViewController {
         mainFrame.pack();
         return register;
     }
+
+    public PurchaseTicketView createPurchaseTicketView(Seat s, boolean isRegistered) {
+        removeCurrentPanel();
+        PurchaseTicketView purchaseView = new PurchaseTicketView(s, isRegistered);
+        currentPanel = purchaseView;
+        mainFrame.add(purchaseView);
+        mainFrame.pack();
+        return purchaseView;
+    }
+
 
     public CancelTicketView createCancelTicketView(Ticket t, boolean isRegistered) {
         removeCurrentPanel();

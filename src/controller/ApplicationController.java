@@ -3,6 +3,9 @@ package controller;
 import java.util.ArrayList;
 
 import javax.swing.event.MouseInputAdapter;
+
+import jdk.internal.util.xml.impl.Input;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -171,6 +174,37 @@ public class ApplicationController {
                 }
             }
         });
+    }
+
+    public void purchaseTicket(Seat s, boolean isRegistered){
+        PurchaseTicketView view = vc.createPurchaseTicketView(s, isRegistered);
+
+        view.addCancelButtonListener((ActionEvent e) -> {
+            mainAppView();
+        });
+
+        view.addPurchaseButtonListener((ActionEvent e) -> {
+            String email = view.getEmail();
+            String name = view.getName();
+            String cardNumber = view.getCardNumber();
+            String year = view.getYear();
+            String month = view.getMonth();
+            String cvv = view.getCvvNumber();
+            String coupon = view.getCoupon();
+
+            if( !InputChecker.checkNumber(cardNumber, 16) || !InputChecker.checkNumber(cvv, 3) || name.isBlank()){
+                vc.displayMessage("make sure all information entered is correct");
+                return;
+            }
+
+            if(!InputChecker.checkEmail(email) && !isRegistered){
+                vc.displayMessage("Invalid email field");
+                return;
+            }
+            
+            
+        });
+
     }
 
     public void mainAppView() {
