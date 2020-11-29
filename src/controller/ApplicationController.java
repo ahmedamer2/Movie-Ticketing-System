@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.event.MouseInputAdapter;
 
-import jdk.internal.util.xml.impl.Input;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -21,6 +19,7 @@ public class ApplicationController {
     ArrayList<Movie> movieList;
     RegisteredUser currentUser;
     MyViewController vc;
+    final String theatreCardNumber = "1234567812345678";
 
     public ApplicationController() {
         DBManager db = DBManager.getInstance();
@@ -68,6 +67,8 @@ public class ApplicationController {
 
             if (pass.isBlank() || email.isBlank()) {
                 vc.displayMessage("Make sure all fields are filled out");
+            } else if (!InputChecker.checkEmail(email)) {
+                vc.displayMessage("Invalid Email Format");
             } else {
                 RegisteredUser user = new RegisteredUser(email, pass, "Not a Field", "Not a Field");
 
@@ -118,7 +119,8 @@ public class ApplicationController {
             events.add(new MouseInputAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     Movie selectedMovie = movieView.getMovie(index);
-                    browseShowtimes(selectedMovie);
+                    // browseShowtimes(selectedMovie);
+                    purchaseTicket(selectedMovie.getShowTimeList().get(0).getSeatList().get(0), currentUser != null);
                 }
             });
         }
@@ -127,7 +129,6 @@ public class ApplicationController {
     }
 
     public void browseShowtimes(Movie selectedMovie) {
-        // TODO
         System.out.println(selectedMovie.getTitle());
     }
 
@@ -143,6 +144,8 @@ public class ApplicationController {
             String email = view.getEmail();
             if (email.isBlank() && currentUser == null) {
                 vc.displayMessage("You are not logged in: Please enter an email to receive the coupon!");
+            } else if (!InputChecker.checkEmail(email) && currentUser == null) {
+                vc.displayMessage("Invalid Email Format");
             } else {
                 Coupon c = tc.cancelTicket(ticketToCancel.getTicketID(), currentUser);
                 if (currentUser != null)
@@ -152,6 +155,7 @@ public class ApplicationController {
                 mainAppView();
             }
         });
+
     }
 
     public void searchTicket() {
@@ -176,7 +180,7 @@ public class ApplicationController {
         });
     }
 
-    public void purchaseTicket(Seat s, boolean isRegistered){
+    public void purchaseTicket(Seat s, boolean isRegistered) {
         PurchaseTicketView view = vc.createPurchaseTicketView(s, isRegistered);
 
         view.addCancelButtonListener((ActionEvent e) -> {
@@ -190,19 +194,43 @@ public class ApplicationController {
             String year = view.getYear();
             String month = view.getMonth();
             String cvv = view.getCvvNumber();
-            String coupon = view.getCoupon();
+            String couponID = view.getCoupon();
+            double amountToPay = s.getPrice();
 
-            if( !InputChecker.checkNumber(cardNumber, 16) || !InputChecker.checkNumber(cvv, 3) || name.isBlank()){
+            // Error Checking Inputs
+            if (!InputChecker.checkNumber(cardNumber, 16) || !InputChecker.checkNumber(cvv, 3) || name.isBlank()) {
                 vc.displayMessage("make sure all information entered is correct");
                 return;
-            }
-
-            if(!InputChecker.checkEmail(email) && !isRegistered){
+            } else if (!InputChecker.checkEmail(email) && !isRegistered) {
                 vc.displayMessage("Invalid email field");
                 return;
             }
-            
-            
+
+            // Redeeming Coupon
+            if (!couponID.isBlank()) {
+                Coupon c = tc.findCoupon(couponID);
+                if (c == null) {
+                    vc.displayMessage("Could Not Find Coupon");
+                    return;
+                }
+                amountToPay -= c.getValue();
+            }
+
+            // Processing Payment
+            if (!pm.processPayment(new Payment(amountToPay, cardNumber, theatreCardNumber))) {
+                vc.displayMessage("Payment Failed");
+                return;
+            }
+
+            // Create ticket and send confirmation email
+            Ticket newTicket = tc.createTicket(s);
+            if (currentUser == null)
+                em.emailTicketPurchase(email, newTicket, amountToPay);
+            else
+                em.emailTicketPurchase(currentUser.getEmail(), newTicket, amountToPay);
+
+            vc.displayMessage("Payment Succesful, Look for an email with your ticket info");
+            mainAppView();
         });
 
     }

@@ -66,10 +66,6 @@ public class DBManager {
         }
 
         payments = new ArrayList<Payment>();
-        Ticket t = new Ticket(seats.get(0));
-        tickets.add(t);
-        System.out.println(t.getTicketID());
-
         theatre = new Theatre("MyTheatre", new Address(1234, "street", "U4K7I2", "calgary", "alberta", "CA"), movies);
     }
 

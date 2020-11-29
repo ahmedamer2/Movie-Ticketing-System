@@ -48,4 +48,10 @@ public class ShowTime {
         if (s.getRow() < rowCapacity && s.getCol() < colCapacity)
             seatList.add(s);
     }
+
+    @Override
+    public String toString() {
+        return startTime.getMonth().getValue() + "/" + startTime.getDayOfMonth() + "/" + startTime.getYear() + ", "
+                + startTime.getHour() + ":" + startTime.getMinute();
+    }
 }

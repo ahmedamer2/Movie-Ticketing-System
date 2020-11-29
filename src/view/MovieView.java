@@ -6,9 +6,7 @@
 package view;
 
 import model.Movie;
-import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.GroupLayout;
@@ -16,8 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.event.MouseInputAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  *

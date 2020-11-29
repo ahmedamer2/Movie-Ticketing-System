@@ -36,4 +36,15 @@ public class Ticket {
     public LocalDateTime getIssueDate() {
         return issueDate;
     }
+
+    @Override
+    public String toString() {
+        String st = "";
+        st += "Ticket ID: " + ticketID;
+        st += "\nMovie title: " + seat.getShowTime().getMovie().getTitle();
+        st += "\nShowTime: " + seat.getShowTime().toString();
+        char seatCol = (char) (seat.getCol() + 65);
+        st += "\n Seat: " + seat.getRow() + ", " + seatCol;
+        return st;
+    }
 }

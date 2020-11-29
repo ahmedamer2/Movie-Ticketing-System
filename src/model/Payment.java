@@ -2,12 +2,12 @@ package model;
 
 public class Payment {
     private double amount;
-    private int senderCardID;
-    private int receiverCardID;
+    private String senderCardID;
+    private String receiverCardID;
     private boolean isPaid;
     private boolean isPending;
 
-    public Payment(double amount, int senderCardID, int receiverCardID) {
+    public Payment(double amount, String senderCardID, String receiverCardID) {
         this.amount = amount;
         this.senderCardID = senderCardID;
         this.receiverCardID = receiverCardID;
@@ -20,11 +20,11 @@ public class Payment {
         return amount;
     }
 
-    public int getSenderCardID() {
+    public String getSenderCardID() {
         return senderCardID;
     }
 
-    public int getReceiverCardID() {
+    public String getReceiverCardID() {
         return receiverCardID;
     }
 

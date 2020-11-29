@@ -17,7 +17,6 @@ public class TicketController {
         Ticket ticket = new Ticket(seat);
         ticketList.add(ticket);
         db.addTicket(ticket);
-        // Use EmailManager to send an email?
         return ticket;
     }
 
