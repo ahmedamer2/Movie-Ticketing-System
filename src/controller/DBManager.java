@@ -38,21 +38,34 @@ public class DBManager {
         creditCards = new HashMap<Integer, Double>();
 
         movies = new ArrayList<Movie>();
-        movies.add(new Movie("Movie1", "genre", "description", ""));
-        movies.add(new Movie("Movie2", "genre", "another description", ""));
+        movies.add(new Movie("Avengers Endgame", "Action", "Superheros fight", "src\\Images\\poster1.jpg"));
+        movies.add(new Movie("Black Panther", "Action", "Wakanda Forever!", "src\\Images\\poster2.jpg"));
+        movies.add(new Movie("Joker", "Thriller", "Joker's story", "src\\Images\\poster3.jpg"));
+        movies.add(new Movie("Star Wars", "Action", "idk", "src\\Images\\poster4.jpg"));
+        movies.add(new Movie("Ironman", "Action", "Tony Stark is cool", "src\\Images\\poster5.jpg"));
+        movies.add(new Movie("Guardians of the Galaxy: V2", "Action", "I am Groot", "src\\Images\\poster6.jpg"));
+
+        movies.get(0).releaseMovie();
+        movies.get(1).releaseMovie();
+        movies.get(4).releaseMovie();
+        movies.get(5).releaseMovie();
 
         showTimes = new ArrayList<ShowTime>();
-        showTimes.add(new ShowTime(LocalDateTime.now(), 1, 2, movies.get(0)));
-        showTimes.add(new ShowTime(LocalDateTime.now(), 1, 2, movies.get(1)));
+        for (Movie movie : movies) {
+            showTimes.add(new ShowTime(LocalDateTime.now(), 10, 10, movie));
+            showTimes.add(new ShowTime(LocalDateTime.of(2020, 12, 4, 22, 0), 10, 10, movie));
+        }
 
         seats = new ArrayList<Seat>();
-        seats.add(new Seat(0, 0, 20, showTimes.get(0)));
-        seats.add(new Seat(0, 1, 20, showTimes.get(0)));
-        seats.add(new Seat(0, 0, 20, showTimes.get(1)));
-        seats.add(new Seat(0, 1, 20, showTimes.get(1)));
+        for (ShowTime st : showTimes) {
+            for (int i = 0; i < st.getRowCapacity(); i++) {
+                for (int j = 0; j < st.getColCapacity(); j++) {
+                    seats.add(new Seat(i, j, 20, st));
+                }
+            }
+        }
 
         payments = new ArrayList<Payment>();
-
         Ticket t = new Ticket(seats.get(0));
         tickets.add(t);
         System.out.println(t.getTicketID());

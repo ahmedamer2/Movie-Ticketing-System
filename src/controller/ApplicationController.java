@@ -71,6 +71,7 @@ public class ApplicationController {
                 if (!auth.registerNewUser(user)) {
                     vc.displayMessage("This Email is already being used, Please try again.");
                 } else {
+                    em.emailRegistration(user.getEmail());
                     vc.displayMessage("Registration Successful");
                     appEntry();
                 }
@@ -99,7 +100,7 @@ public class ApplicationController {
     }
 
     public void browseMovies() {
-        MovieView movieView = vc.createMovieView(movieList);
+        MovieView movieView = vc.createMovieView(movieList, currentUser != null);
 
         movieView.addBackListener(new MouseInputAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -128,7 +129,7 @@ public class ApplicationController {
     }
 
     public void cancelTicket(Ticket t) {
-        CancelTicketView view = vc.createCancelTicketView(t);
+        CancelTicketView view = vc.createCancelTicketView(t, currentUser != null);
 
         view.addCancelListener((ActionEvent e) -> {
             mainAppView();
@@ -136,9 +137,17 @@ public class ApplicationController {
 
         view.addConfirmListener((ActionEvent e) -> {
             Ticket ticketToCancel = view.getTicket();
-            Coupon c = tc.cancelTicket(ticketToCancel.getTicketID(), currentUser);
-            em.emailTicketCancellation("todo@todo.com", c);
-            mainAppView();
+            String email = view.getEmail();
+            if (email.isBlank() && currentUser == null) {
+                vc.displayMessage("You are not logged in: Please enter an email to receive the coupon!");
+            } else {
+                Coupon c = tc.cancelTicket(ticketToCancel.getTicketID(), currentUser);
+                if (currentUser != null)
+                    em.emailTicketCancellation(currentUser.getEmail(), c);
+                else
+                    em.emailTicketCancellation(email, c);
+                mainAppView();
+            }
         });
     }
 
@@ -165,7 +174,7 @@ public class ApplicationController {
     }
 
     public void mainAppView() {
-        MainAppView app = vc.createAppView();
+        MainAppView app = vc.createAppView(currentUser);
 
         app.addCancelTicketListener((ActionEvent e) -> {
             searchTicket();

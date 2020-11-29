@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import view.*;
 import model.Movie;
+import model.RegisteredUser;
 import model.Ticket;
 
 public class MyViewController {
@@ -34,9 +35,9 @@ public class MyViewController {
         return register;
     }
 
-    public CancelTicketView createCancelTicketView(Ticket t) {
+    public CancelTicketView createCancelTicketView(Ticket t, boolean isRegistered) {
         removeCurrentPanel();
-        CancelTicketView cancelView = new CancelTicketView(t);
+        CancelTicketView cancelView = new CancelTicketView(t, isRegistered);
         currentPanel = cancelView;
         mainFrame.add(cancelView);
         mainFrame.pack();
@@ -52,18 +53,18 @@ public class MyViewController {
         return searchView;
     }
 
-    public MainAppView createAppView() {
+    public MainAppView createAppView(RegisteredUser u) {
         removeCurrentPanel();
-        MainAppView app = new MainAppView();
+        MainAppView app = new MainAppView(u);
         currentPanel = app;
         mainFrame.add(app);
         mainFrame.pack();
         return app;
     }
 
-    public MovieView createMovieView(ArrayList<Movie> movies) {
+    public MovieView createMovieView(ArrayList<Movie> movies, boolean isRegistered) {
         removeCurrentPanel();
-        MovieView movieView = new MovieView(movies);
+        MovieView movieView = new MovieView(movies, isRegistered);
         currentPanel = movieView;
         mainFrame.add(movieView);
         mainFrame.pack();

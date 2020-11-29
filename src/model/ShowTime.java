@@ -24,6 +24,14 @@ public class ShowTime {
         return seatList;
     }
 
+    public int getColCapacity() {
+        return colCapacity;
+    }
+
+    public int getRowCapacity() {
+        return rowCapacity;
+    }
+
     public LocalDateTime getStartTime() {
         return startTime;
     }

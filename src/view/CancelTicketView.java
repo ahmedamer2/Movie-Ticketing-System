@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.time.LocalDateTime;
+
+import model.RegisteredUser;
 import model.Ticket;
 
 /**
@@ -14,13 +17,19 @@ import model.Ticket;
 public class CancelTicketView extends javax.swing.JPanel {
 
         Ticket ticket;
+        boolean isRegistered;
 
         /**
-         * Creates new form RegisterView
+         * Creates new form myCancelTicketView
          */
-        public CancelTicketView(Ticket ticket) {
-                this.ticket = ticket;
+        public CancelTicketView(Ticket t, boolean isRegistered) {
+                this.isRegistered = isRegistered;
+                ticket = t;
                 initComponents();
+                if (isRegistered) {
+                        emailTextField.setVisible(false);
+                        email.setVisible(false);
+                }
         }
 
         /**
@@ -32,61 +41,118 @@ public class CancelTicketView extends javax.swing.JPanel {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">
         private void initComponents() {
 
-                Title = new javax.swing.JLabel();
+                title = new javax.swing.JLabel();
+                email = new javax.swing.JLabel();
+                emailTextField = new javax.swing.JTextField();
                 confirmButton = new javax.swing.JButton();
                 CancelButton = new javax.swing.JButton();
+                jLabel1 = new javax.swing.JLabel();
 
                 setBackground(new java.awt.Color(255, 153, 204));
-                setBorder(new javax.swing.border.MatteBorder(null));
+                setPreferredSize(new java.awt.Dimension(850, 480));
 
-                Title.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
-                Title.setText("Confirm your Ticket Cancellation");
+                title.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+                title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                title.setText("Confirm Ticket Cancellation");
+
+                email.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+                email.setText("Email");
+
+                emailTextField.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
 
                 confirmButton.setBackground(new java.awt.Color(255, 204, 204));
                 confirmButton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-                confirmButton.setText("Confirm");
-                confirmButton.setToolTipText("Confirm the ticket cancellation");
+                confirmButton.setText("Confirm Cancellation");
+                confirmButton.setToolTipText("Cancel your ticket");
                 confirmButton.setBorder(
                                 javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                confirmButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                confirmButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                confirmButton.setSelected(true);
 
                 CancelButton.setBackground(new java.awt.Color(255, 204, 204));
                 CancelButton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
                 CancelButton.setText("Cancel");
-                CancelButton.setToolTipText("Go back to main screen");
+                CancelButton.setToolTipText("Go back to main view");
                 CancelButton.setBorder(
                                 javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                CancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                CancelButton.setSelected(true);
+
+                jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+
+                String ticketID = ticket.getTicketID();
+                String movieTitle = ticket.getSeat().getShowTime().getMovie().getTitle();
+                // mm/dd/yyyy 10:30pm
+                LocalDateTime st = ticket.getSeat().getShowTime().getStartTime();
+                String showTime = st.getMonth().getValue() + "/" + st.getDayOfMonth() + "/" + st.getYear() + ", "
+                                + st.getHour() + ":" + st.getMinute();
+                char seatCol = (char) (ticket.getSeat().getCol() + 65);
+                String seatPos = ticket.getSeat().getRow() + ", " + seatCol;
+                jLabel1.setText("<html>\n" + "Ticket ID: " + ticketID + "<br />\n" + "Movie Title: " + movieTitle
+                                + "<br />\n" + "ShowTime: " + showTime + "<br />\n" + "Seat: " + seatPos
+                                + "<br />\n</html>"); // NOI18N
+                jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(Title)
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup().addContainerGap(308, Short.MAX_VALUE).addGroup(
-                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addComponent(CancelButton,
+                                                .addGroup(layout.createParallelGroup(
+                                                                javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                .addComponent(title,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)
+                                                                .addComponent(email,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)
+                                                                .addComponent(emailTextField))
+                                                .addGap(270, 270, 270))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(117, 117, 117)
+                                                .addGroup(layout.createParallelGroup(
+                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                .addComponent(jLabel1)
+                                                                .addGroup(layout.createSequentialGroup().addComponent(
+                                                                                confirmButton,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                232,
+                                                                                220,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(
+                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                185, Short.MAX_VALUE)
+                                                                                .addComponent(CancelButton,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                220,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(108, 108, 108)));
+                layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup().addContainerGap().addComponent(title)
+                                                .addGap(29, 29, 29)
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 149,
+                                                                Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(email)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(
+                                                                javax.swing.GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(confirmButton,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                232,
+                                                                                62,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(CancelButton,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                62,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(0, 308, Short.MAX_VALUE)));
-                layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(Title)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69,
-                                                                Short.MAX_VALUE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addContainerGap(79, Short.MAX_VALUE)));
+                                                .addGap(112, 112, 112)));
         }// </editor-fold>
 
         public void addCancelListener(java.awt.event.ActionListener listener) {
@@ -97,13 +163,20 @@ public class CancelTicketView extends javax.swing.JPanel {
                 confirmButton.addActionListener(listener);
         }
 
+        public String getEmail() {
+                return emailTextField.getText();
+        }
+
         public Ticket getTicket() {
                 return ticket;
         }
 
         // Variables declaration - do not modify
         private javax.swing.JButton CancelButton;
-        private javax.swing.JLabel Title;
         private javax.swing.JButton confirmButton;
+        private javax.swing.JLabel email;
+        private javax.swing.JTextField emailTextField;
+        private javax.swing.JLabel jLabel1;
+        private javax.swing.JLabel title;
         // End of variables declaration
 }
