@@ -11,6 +11,7 @@ import model.Movie;
 import model.RegisteredUser;
 import model.Ticket;
 import model.Seat;
+import model.ShowTime;
 
 public class MyViewController {
     JFrame mainFrame;
@@ -45,7 +46,6 @@ public class MyViewController {
         return purchaseView;
     }
 
-
     public CancelTicketView createCancelTicketView(Ticket t, boolean isRegistered) {
         removeCurrentPanel();
         CancelTicketView cancelView = new CancelTicketView(t, isRegistered);
@@ -71,6 +71,15 @@ public class MyViewController {
         mainFrame.add(app);
         mainFrame.pack();
         return app;
+    }
+
+    public ShowTimeView createShowTimeView(Movie movie) {
+        removeCurrentPanel();
+        ShowTimeView stView = new ShowTimeView(movie);
+        currentPanel = stView;
+        mainFrame.add(stView);
+        mainFrame.pack();
+        return stView;
     }
 
     public MovieView createMovieView(ArrayList<Movie> movies, boolean isRegistered) {

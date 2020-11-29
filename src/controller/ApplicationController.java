@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.event.MouseInputAdapter;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -119,8 +120,7 @@ public class ApplicationController {
             events.add(new MouseInputAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     Movie selectedMovie = movieView.getMovie(index);
-                    // browseShowtimes(selectedMovie);
-                    purchaseTicket(selectedMovie.getShowTimeList().get(0).getSeatList().get(0), currentUser != null);
+                    browseShowtimes(selectedMovie);
                 }
             });
         }
@@ -129,7 +129,28 @@ public class ApplicationController {
     }
 
     public void browseShowtimes(Movie selectedMovie) {
-        System.out.println(selectedMovie.getTitle());
+        ShowTimeView stView = vc.createShowTimeView(selectedMovie);
+
+        stView.addBackListener((ActionEvent e) -> {
+            browseMovies();
+        });
+
+        ArrayList<ActionListener> events = new ArrayList<ActionListener>();
+
+        ArrayList<ShowTime> stList = selectedMovie.getShowTimeList();
+        for (int i = 0; i < stList.size(); i++) {
+            int index = i;
+            events.add((ActionEvent e) -> {
+                ShowTime selectedST = stView.getShowTime(index);
+                browseSeats(selectedST);
+            });
+        }
+
+        stView.addShowTimeListeners(events);
+    }
+
+    public void browseSeats(ShowTime st) {
+        System.out.println(st.toString());
     }
 
     public void cancelTicket(Ticket t) {

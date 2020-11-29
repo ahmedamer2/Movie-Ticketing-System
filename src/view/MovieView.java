@@ -42,13 +42,12 @@ public class MovieView extends JPanel {
 
         initComponents();
         for (int k = 0; k < movieList.size(); k++) {
-            image_scaller(movieList.get(k).getPoster(), moviesDisplayed[k], 200, 275);
+            image_scaler(movieList.get(k).getPoster(), moviesDisplayed[k], 200, 275);
         }
 
     }
 
-    public void image_scaller(ImageIcon icon, JLabel to, int width, int height) {
-
+    public void image_scaler(ImageIcon icon, JLabel to, int width, int height) {
         Image img = icon.getImage();
         Image imgScalled = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         icon = new ImageIcon(imgScalled);
@@ -145,7 +144,7 @@ public class MovieView extends JPanel {
                         .addComponent(imageScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)));
 
         ImageIcon back = new ImageIcon("src\\Images\\backButton.png");
-        image_scaller(back, backButton, 30, 30);
+        image_scaler(back, backButton, 30, 30);
 
     }
 
