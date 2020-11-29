@@ -35,8 +35,9 @@ public class TicketSearchView extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 153, 204));
         setBorder(new javax.swing.border.MatteBorder(null));
+        setPreferredSize(new java.awt.Dimension(850,480));
 
-        Title.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
+        Title.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         Title.setText("Enter the ID of the ticket that you want to Cancel");
 
         ticketIDTitle.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
