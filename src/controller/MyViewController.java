@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import view.*;
 import model.Movie;
+import model.Ticket;
 
 public class MyViewController {
     JFrame mainFrame;
@@ -31,6 +32,24 @@ public class MyViewController {
         mainFrame.add(register);
         mainFrame.pack();
         return register;
+    }
+
+    public CancelTicketView createCancelTicketView(Ticket t) {
+        removeCurrentPanel();
+        CancelTicketView cancelView = new CancelTicketView(t);
+        currentPanel = cancelView;
+        mainFrame.add(cancelView);
+        mainFrame.pack();
+        return cancelView;
+    }
+
+    public TicketSearchView createTicketSearchView() {
+        removeCurrentPanel();
+        TicketSearchView searchView = new TicketSearchView();
+        currentPanel = searchView;
+        mainFrame.add(searchView);
+        mainFrame.pack();
+        return searchView;
     }
 
     public MainAppView createAppView() {

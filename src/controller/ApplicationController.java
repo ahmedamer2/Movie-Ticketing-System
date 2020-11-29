@@ -3,8 +3,6 @@ package controller;
 import java.util.ArrayList;
 
 import javax.swing.event.MouseInputAdapter;
-import javax.swing.event.MouseInputListener;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,6 +13,7 @@ import model.*;
 public class ApplicationController {
     TicketController tc;
     PaymentManager pm;
+    EmailManager em;
     AuthenticationSystem auth;
     ArrayList<Movie> movieList;
     RegisteredUser currentUser;
@@ -24,6 +23,7 @@ public class ApplicationController {
         DBManager db = DBManager.getInstance();
         tc = new TicketController(db.getTickets(), db.getCoupons());
         pm = new PaymentManager(db.getPayments());
+        em = new EmailManager();
         auth = new AuthenticationSystem();
         movieList = db.getMovies();
         vc = new MyViewController();
@@ -101,18 +101,18 @@ public class ApplicationController {
     public void browseMovies() {
         MovieView movieView = vc.createMovieView(movieList);
 
-        movieView.addBackListener(new MouseInputAdapter(){
-            public void mouseClicked(MouseEvent e){
+        movieView.addBackListener(new MouseInputAdapter() {
+            public void mouseClicked(MouseEvent e) {
                 mainAppView();
             }
         });
 
         ArrayList<MouseListener> events = new ArrayList<MouseListener>();
 
-        for(int i = 0; i<movieList.size() ; i++ ){
+        for (int i = 0; i < movieList.size(); i++) {
             int index = i;
-            events.add(new MouseInputAdapter(){
-                public void mouseClicked(MouseEvent e){
+            events.add(new MouseInputAdapter() {
+                public void mouseClicked(MouseEvent e) {
                     Movie selectedMovie = movieView.getMovie(index);
                     browseShowtimes(selectedMovie);
                 }
@@ -120,21 +120,55 @@ public class ApplicationController {
         }
 
         movieView.addMovieListners(events);
-        
-           
     }
-    
-    public void browseShowtimes(Movie selectedMovie){
-        //TODO
+
+    public void browseShowtimes(Movie selectedMovie) {
+        // TODO
         System.out.println(selectedMovie.getTitle());
     }
 
+    public void cancelTicket(Ticket t) {
+        CancelTicketView view = vc.createCancelTicketView(t);
+
+        view.addCancelListener((ActionEvent e) -> {
+            mainAppView();
+        });
+
+        view.addConfirmListener((ActionEvent e) -> {
+            Ticket ticketToCancel = view.getTicket();
+            Coupon c = tc.cancelTicket(ticketToCancel.getTicketID(), currentUser);
+            em.emailTicketCancellation("todo@todo.com", c);
+            mainAppView();
+        });
+    }
+
+    public void searchTicket() {
+        TicketSearchView view = vc.createTicketSearchView();
+
+        view.addCancelListener((ActionEvent e) -> {
+            mainAppView();
+        });
+
+        view.addSearchListener((ActionEvent e) -> {
+            String ticketID = view.getTicketID();
+            if (ticketID.isBlank()) {
+                vc.displayMessage("Make sure all fields are filled");
+            } else {
+                Ticket ticketToCancel = tc.findTicket(ticketID);
+                if (ticketToCancel != null) {
+                    cancelTicket(ticketToCancel);
+                } else {
+                    vc.displayMessage("No Ticket was found.");
+                }
+            }
+        });
+    }
 
     public void mainAppView() {
         MainAppView app = vc.createAppView();
 
         app.addCancelTicketListener((ActionEvent e) -> {
-            System.out.println("not implemented");
+            searchTicket();
         });
 
         app.addMoviesListener((ActionEvent e) -> {

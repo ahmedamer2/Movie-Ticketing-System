@@ -38,8 +38,8 @@ public class DBManager {
         creditCards = new HashMap<Integer, Double>();
 
         movies = new ArrayList<Movie>();
-        movies.add(new Movie("Movie1", "genre", "description",""));
-        movies.add(new Movie("Movie2", "genre", "another description",""));
+        movies.add(new Movie("Movie1", "genre", "description", ""));
+        movies.add(new Movie("Movie2", "genre", "another description", ""));
 
         showTimes = new ArrayList<ShowTime>();
         showTimes.add(new ShowTime(LocalDateTime.now(), 1, 2, movies.get(0)));
@@ -52,6 +52,11 @@ public class DBManager {
         seats.add(new Seat(0, 1, 20, showTimes.get(1)));
 
         payments = new ArrayList<Payment>();
+
+        Ticket t = new Ticket(seats.get(0));
+        tickets.add(t);
+        System.out.println(t.getTicketID());
+
         theatre = new Theatre("MyTheatre", new Address(1234, "street", "U4K7I2", "calgary", "alberta", "CA"), movies);
     }
 

@@ -15,9 +15,9 @@ public class Ticket {
 
     public Coupon generateCoupon(boolean isRegistered) {
         if (isRegistered)
-            return new Coupon(seat.getPrice(), ticketID);
+            return new Coupon(seat.getPrice());
         else
-            return new Coupon(seat.getPrice() * 0.85, ticketID);
+            return new Coupon(seat.getPrice() * 0.85);
     }
 
     // Getters and Setters

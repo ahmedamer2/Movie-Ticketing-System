@@ -9,7 +9,11 @@ public class EmailManager {
     }
 
     public void emailTicketCancellation(String email, Coupon coupon) {
-        // implement this
+        System.out.println("To: " + email);
+        System.out.println("Subject: Ticket Cancellation");
+        System.out.println("This is your Coupon ID for the cancelled Ticker: ");
+        System.out.println(coupon.getCouponID());
+        System.out.println("Redeem this Coupon when purchasing a ticket to get a reduced price!");
     }
 
     public void emailRegistration(String email, Coupon coupon) {
