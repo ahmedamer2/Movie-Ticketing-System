@@ -90,9 +90,13 @@ public class CancelTicketView extends javax.swing.JPanel {
                                 + st.getHour() + ":" + st.getMinute();
                 char seatCol = (char) (ticket.getSeat().getCol() + 65);
                 String seatPos = ticket.getSeat().getRow() + ", " + seatCol;
+                double redeem_amount = ticket.getSeat().getPrice();
+                if (!isRegistered)
+                        redeem_amount *= 0.85;
+
                 jLabel1.setText("<html>\n" + "Ticket ID: " + ticketID + "<br />\n" + "Movie Title: " + movieTitle
                                 + "<br />\n" + "ShowTime: " + showTime + "<br />\n" + "Seat: " + seatPos
-                                + "<br />\n</html>"); // NOI18N
+                                + "<br />\n<br />\n<b>Redeem Amount: $" + redeem_amount + "<b/><br />\n</html>"); // NOI18N
                 jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
