@@ -1,7 +1,9 @@
 package controller;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,6 +23,7 @@ public class MyViewController {
         mainFrame = new JFrame();
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setTitle("Ticket Registration System");
+        mainFrame.setIconImage(new ImageIcon("src//Images//popcorn.png").getImage());
         mainFrame.setVisible(true);
     }
 
