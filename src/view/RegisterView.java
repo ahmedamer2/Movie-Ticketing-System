@@ -1,7 +1,7 @@
 package view;
 
 /**
- * The RegisterView class extends JPanel and is used to present the registration screen for the user to regiuster.
+ * The RegisterView class extends JPanel and is used to present the registration screen for the user to register.
  * @author Ahmed Amer, Yassin Bayoumy, Bikramjeet
  * @version 1.0
  * @since November 29, 2020
