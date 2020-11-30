@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import model.*;
 
@@ -19,6 +21,15 @@ public class TicketController {
         ticketList.add(ticket);
         db.addTicket(ticket);
         return ticket;
+    }
+
+    public boolean verifyCancellation(Ticket t) {
+        long time_diff = Math.abs(Duration.between(LocalDateTime.now(), t.getIssueDate()).toHours());
+
+        if (time_diff > 72) {
+            return false;
+        }
+        return true;
     }
 
     public Coupon cancelTicket(String ticketID, RegisteredUser user) {

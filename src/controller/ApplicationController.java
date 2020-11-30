@@ -210,7 +210,10 @@ public class ApplicationController {
             } else {
                 Ticket ticketToCancel = tc.findTicket(ticketID);
                 if (ticketToCancel != null) {
-                    cancelTicket(ticketToCancel);
+                    if (tc.verifyCancellation(ticketToCancel))
+                        cancelTicket(ticketToCancel);
+                    else
+                        vc.displayMessage("Cannot Cancel Tickets purchased more than 72 hours ago");
                 } else {
                     vc.displayMessage("No Ticket was found.");
                 }
