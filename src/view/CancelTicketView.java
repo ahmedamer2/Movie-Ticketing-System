@@ -43,8 +43,8 @@ public class CancelTicketView extends javax.swing.JPanel {
                 email = new javax.swing.JLabel();
                 emailTextField = new javax.swing.JTextField();
                 confirmButton = new javax.swing.JButton();
-                CancelButton = new javax.swing.JButton();
-                jLabel1 = new javax.swing.JLabel();
+                cancelButton = new javax.swing.JButton();
+                ticketInfo = new javax.swing.JLabel();
 
                 //setup JPanel
                 setBackground(new java.awt.Color(255, 153, 204));
@@ -70,17 +70,17 @@ public class CancelTicketView extends javax.swing.JPanel {
                 confirmButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
                 confirmButton.setSelected(true);
 
-                CancelButton.setBackground(new java.awt.Color(255, 204, 204));
-                CancelButton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-                CancelButton.setText("Cancel");
-                CancelButton.setToolTipText("Go back to main view");
-                CancelButton.setBorder(
+                cancelButton.setBackground(new java.awt.Color(255, 204, 204));
+                cancelButton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+                cancelButton.setText("Cancel");
+                cancelButton.setToolTipText("Go back to main view");
+                cancelButton.setBorder(
                                 javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                CancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-                CancelButton.setSelected(true);
+                cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                cancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                cancelButton.setSelected(true);
 
-                jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+                ticketInfo.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
 
                 String ticketID = ticket.getTicketID();
                 String movieTitle = ticket.getSeat().getShowTime().getMovie().getTitle();
@@ -92,10 +92,10 @@ public class CancelTicketView extends javax.swing.JPanel {
                 if (!isRegistered)
                         redeem_amount *= 0.85;
 
-                jLabel1.setText("<html>\n" + "Ticket ID: " + ticketID + "<br />\n" + "Movie Title: " + movieTitle
+                ticketInfo.setText("<html>\n" + "Ticket ID: " + ticketID + "<br />\n" + "Movie Title: " + movieTitle
                                 + "<br />\n" + "ShowTime: " + showTime + "<br />\n" + "Seat: " + seatPos
                                 + "<br />\n<br />\n<b>Redeem Amount: $" + redeem_amount + "<b/><br />\n</html>"); // NOI18N
-                jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                ticketInfo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
                 //This code handles the layout for the JPanel and places the components appropriately.
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -119,7 +119,7 @@ public class CancelTicketView extends javax.swing.JPanel {
                                                 .addGap(117, 117, 117)
                                                 .addGroup(layout.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addComponent(jLabel1)
+                                                                .addComponent(ticketInfo)
                                                                 .addGroup(layout.createSequentialGroup().addComponent(
                                                                                 confirmButton,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -128,7 +128,7 @@ public class CancelTicketView extends javax.swing.JPanel {
                                                                                 .addPreferredGap(
                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                                                                 185, Short.MAX_VALUE)
-                                                                                .addComponent(CancelButton,
+                                                                                .addComponent(cancelButton,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                 220,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -136,7 +136,7 @@ public class CancelTicketView extends javax.swing.JPanel {
                 layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup().addContainerGap().addComponent(title)
                                                 .addGap(29, 29, 29)
-                                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 149,
+                                                .addComponent(ticketInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 149,
                                                                 Short.MAX_VALUE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(email)
@@ -151,7 +151,7 @@ public class CancelTicketView extends javax.swing.JPanel {
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 62,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(CancelButton,
+                                                                .addComponent(cancelButton,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 62,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -164,7 +164,7 @@ public class CancelTicketView extends javax.swing.JPanel {
          * @param listener The ActionListener that will listen for the cancelButton press
          */
         public void addCancelListener(java.awt.event.ActionListener listener) {
-                CancelButton.addActionListener(listener);
+                cancelButton.addActionListener(listener);
         }
 
         /**
@@ -194,10 +194,10 @@ public class CancelTicketView extends javax.swing.JPanel {
         }
 
         // Variables for component declaration 
-        private javax.swing.JButton CancelButton;
+        private javax.swing.JButton cancelButton;
         private javax.swing.JButton confirmButton;
         private javax.swing.JLabel email;
         private javax.swing.JTextField emailTextField;
-        private javax.swing.JLabel jLabel1;
+        private javax.swing.JLabel ticketInfo;
         private javax.swing.JLabel title;
 }
