@@ -11,7 +11,7 @@ import model.Seat;
  */
 public class PurchaseTicketView extends javax.swing.JPanel {
 
-        //memver variable needed for logic
+        //member variable needed for logic
         private Seat theSeat;
 
         /**
