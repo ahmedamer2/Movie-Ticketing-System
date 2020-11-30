@@ -14,6 +14,7 @@ public class TicketController {
 
     public Ticket createTicket(Seat seat) {
         DBManager db = DBManager.getInstance();
+        seat.setAvailable(false);
         Ticket ticket = new Ticket(seat);
         ticketList.add(ticket);
         db.addTicket(ticket);
@@ -22,8 +23,8 @@ public class TicketController {
 
     public Coupon cancelTicket(String ticketID, RegisteredUser user) {
         DBManager db = DBManager.getInstance();
-
         Ticket ticket = findTicket(ticketID);
+        ticket.getSeat().setAvailable(true);
         Coupon coupon = null;
 
         if (ticket != null) {

@@ -82,6 +82,15 @@ public class MyViewController {
         return stView;
     }
 
+    public SeatView createSeatView(ShowTime st) {
+        removeCurrentPanel();
+        SeatView seatView = new SeatView(st);
+        currentPanel = seatView;
+        mainFrame.add(seatView);
+        mainFrame.pack();
+        return seatView;
+    }
+
     public MovieView createMovieView(ArrayList<Movie> movies, boolean isRegistered) {
         removeCurrentPanel();
         MovieView movieView = new MovieView(movies, isRegistered);

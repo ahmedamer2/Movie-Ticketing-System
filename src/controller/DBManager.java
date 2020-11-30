@@ -52,17 +52,14 @@ public class DBManager {
 
         showTimes = new ArrayList<ShowTime>();
         for (Movie movie : movies) {
-            showTimes.add(new ShowTime(LocalDateTime.now(), 10, 10, movie));
-            showTimes.add(new ShowTime(LocalDateTime.of(2020, 12, 4, 22, 0), 10, 10, movie));
+            showTimes.add(new ShowTime(LocalDateTime.now(), 5, 10, movie));
+            showTimes.add(new ShowTime(LocalDateTime.of(2020, 12, 4, 22, 0), 5, 10, movie));
         }
 
         seats = new ArrayList<Seat>();
         for (ShowTime st : showTimes) {
-            for (int i = 0; i < st.getRowCapacity(); i++) {
-                for (int j = 0; j < st.getColCapacity(); j++) {
-                    seats.add(new Seat(i, j, 20, st));
-                }
-            }
+            st.createSeats();
+            seats.addAll(st.getSeatList());
         }
 
         payments = new ArrayList<Payment>();

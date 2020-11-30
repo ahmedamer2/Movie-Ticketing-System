@@ -15,14 +15,12 @@ import model.Seat;
 public class PurchaseTicketView extends javax.swing.JPanel {
 
         private Seat theSeat;
-        private boolean isRegistered;
 
         /**
          * Creates new form PurchaseTicketView
          */
         public PurchaseTicketView(Seat s, boolean isRegistered) {
                 theSeat = s;
-                this.isRegistered = isRegistered;
                 initComponents();
 
                 if (isRegistered) {

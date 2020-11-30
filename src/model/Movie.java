@@ -11,7 +11,6 @@ public class Movie {
     private ImageIcon poster;
     private ArrayList<ShowTime> showTimeList;
 
-
     public Movie(String title, String genre, String synopsys, String posterLocation) {
         this.title = title;
         this.genre = genre;
@@ -72,6 +71,10 @@ public class Movie {
 
     public void addShowTime(ShowTime st) {
         showTimeList.add(st);
+        if (showTimeList.size() > 10) {
+            System.err.println("Max ShowTime Amount: 10");
+            System.exit(0);
+        }
     }
 
     @Override

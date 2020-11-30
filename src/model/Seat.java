@@ -13,14 +13,17 @@ public class Seat {
         this.price = price;
         isAvailable = true;
         this.showTime = showTime;
-        showTime.addSeat(this);
     }
 
+    // Getters and Setters
     public boolean isAvailable() {
         return isAvailable;
     }
 
-    // Getters and Setters
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
     public ShowTime getShowTime() {
         return showTime;
     }

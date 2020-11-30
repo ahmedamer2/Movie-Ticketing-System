@@ -150,7 +150,24 @@ public class ApplicationController {
     }
 
     public void browseSeats(ShowTime st) {
-        System.out.println(st.toString());
+        SeatView seatView = vc.createSeatView(st);
+
+        seatView.addBackListener((ActionEvent e) -> {
+            browseShowtimes(st.getMovie());
+        });
+
+        ArrayList<ActionListener> events = new ArrayList<ActionListener>();
+
+        ArrayList<Seat> seatList = st.getSeatList();
+        for (int i = 0; i < seatList.size(); i++) {
+            int index = i;
+            events.add((ActionEvent e) -> {
+                Seat selectedSeat = seatView.getSeat(index);
+                purchaseTicket(selectedSeat, currentUser != null);
+            });
+        }
+
+        seatView.addSeatListeners(events);
     }
 
     public void cancelTicket(Ticket t) {
@@ -205,7 +222,7 @@ public class ApplicationController {
         PurchaseTicketView view = vc.createPurchaseTicketView(s, isRegistered);
 
         view.addCancelButtonListener((ActionEvent e) -> {
-            mainAppView();
+            browseSeats(s.getShowTime());
         });
 
         view.addPurchaseButtonListener((ActionEvent e) -> {

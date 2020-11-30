@@ -1,134 +1,92 @@
 package view;
 
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Seat;
+import model.ShowTime;
 
-import javax.swing.JButton;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-
-public class SeatView {
-    JFrame frame;
-    JPanel panel;
-    JButton[] bJButtons = new JButton[100];
-    JButton cancel;
-    JButton confirm;
+public class SeatView extends JPanel {
+    JButton[] seatButtons = new JButton[100];
+    JButton cancelButton;
     JLabel[] labels = new JLabel[10];
-    JLabel sc = new JLabel();
-    int a = 0, b = 0;
-    int x, y;
-    ArrayList<Seat> seats;
+    JLabel screenHere = new JLabel();
+    ShowTime st;
 
-    public SeatView(ArrayList<Seat> s) {
-        seats = s;
+    public SeatView(ShowTime st) {
+        this.st = st;
+        initComponents();
+
+        ArrayList<Seat> seatList = st.getSeatList();
+        for (int i = 0; i < seatList.size(); i++) {
+            seatButtons[i].setEnabled(seatList.get(i).isAvailable());
+        }
     }
 
-    public void start() {
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(850, 480);
-        frame.setLayout(null);
-        panel = new JPanel();
-        panel.setSize(840, 470);
-        panel.setLayout(null);
-        panel.setBackground(Color.green);
+    private void initComponents() {
+        setPreferredSize(new Dimension(850, 480));
+        setLayout(null);
+        setBackground(new Color(255, 153, 204));
 
-        sc = new JLabel("SCREEN HERE");
-        sc.setSize(100, 50);
+        screenHere = new JLabel("SCREEN HERE");
+        screenHere.setFont(new java.awt.Font("Comic Sans MS", 0, 14));
+        screenHere.setSize(100, 50);
 
-        confirm = new JButton("Confirm Seats");
-        confirm.setSize(100, 20);
-        confirm.setLocation(730, 430);
-        panel.add(confirm);
+        cancelButton = new JButton("Back");
+        cancelButton.setSize(100, 20);
+        cancelButton.setLocation(20, 430);
+        cancelButton.setBackground(new java.awt.Color(255, 204, 204));
+        cancelButton.setFont(new java.awt.Font("Comic Sans MS", 0, 14));
+        cancelButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        add(cancelButton);
 
-        cancel = new JButton("Cancel");
-        cancel.setSize(100, 20);
-        cancel.setLocation(20, 430);
-        panel.add(cancel);
-
-        x = 10;
-        y = 10;
+        int x;
+        int y = 50;
         char c = 'A';
-        for (int i = 0; i < 5; i++) {
+        int rows = st.getRowCapacity();
+        int cols = st.getColCapacity();
+        for (int i = 0; i < rows; i++) {
             c = 'A';
-            y += 65;
-            x = 70;
-            labels[i] = new JLabel("Row " + Integer.toString(5 - i));
+            x = 120;
+            labels[i] = new JLabel("Row " + i);
             labels[i].setSize(50, 20);
-            panel.add(labels[i]);
+            add(labels[i]);
             labels[i].setLocation(x - 50, y + 25);
 
-            for (int j = 0; j < 10; j++) {
-                bJButtons[i * 10 + j] = new JButton();
-                bJButtons[i * 10 + j].setText(Character.toString(c));
-                bJButtons[i * 10 + j].setSize(55, 55);
-                panel.add(bJButtons[i * 10 + j]);
-                bJButtons[i * 10 + j].setLocation(x, y);
-
+            for (int j = 0; j < cols; j++) {
+                seatButtons[i * cols + j] = new JButton();
+                seatButtons[i * cols + j].setText(Character.toString(c));
+                seatButtons[i * cols + j].setSize(55, 55);
+                add(seatButtons[i * cols + j]);
+                seatButtons[i * cols + j].setLocation(x, y);
                 x += 65;
                 c++;
             }
-
+            y += 65;
         }
-        /*
-         * bJButtons[10].addActionListener(new ActionListener() { public void
-         * actionPerformed(ActionEvent e) {
-         * //statusLabel.setText("Ok Button is clicked here");
-         * System.out.println("seat is 9a"); } });
-         */
+        add(screenHere);
+        screenHere.setLocation(360, y + 30);
+        setVisible(true);
+    }
 
-        for (a = 0; a < 5; a++) {
-            System.out.println(a);
-            for (b = 0; b < 10; b++) {
-                addListener(bJButtons[(a * 10) + b], a, b);
+    public void addBackListener(java.awt.event.ActionListener e) {
+        cancelButton.addActionListener(e);
+    }
 
-            }
+    public void addSeatListeners(ArrayList<java.awt.event.ActionListener> e) {
+        for (int i = 0; i < e.size(); i++) {
+            seatButtons[i].addActionListener(e.get(i));
         }
-
-        panel.add(sc);
-        sc.setLocation(350, y + 80);
-
-        frame.add(panel);
-        panel.setVisible(true);
-        frame.setVisible(true);
     }
 
-    void addListener(JButton button, int a, int b) {
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                booked(button);
-                System.out.println("Row " + Integer.toString(10 - a) + "seat " + (char) (((int) 'A') + b));
-
-            }
-        });
+    public Seat getSeat(int index) {
+        return st.getSeatList().get(index);
     }
-
-    void setStatus() {
-
-    }
-
-    void booked(JButton button) {
-        button.setText("X");
-
-    }
-
-    // public static void main(String[] args) {
-    // ArrayList<Seat> sList = new ArrayList<Seat>();
-
-    // for (int i = 0; i < 5; i++) {
-    // for (int j = 0; j < 10; j++) {
-    // Seat seat = new Seat(i, j, 20);
-    // sList.add(seat);
-    // }
-
-    // }
-
-    // SeatView s = new SeatView(sList);
-    // s.start();
-
-    // }
 }

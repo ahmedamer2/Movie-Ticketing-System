@@ -11,6 +11,10 @@ public class ShowTime {
     private ArrayList<Seat> seatList;
 
     public ShowTime(LocalDateTime startTime, int rowCapacity, int colCapacity, Movie m) {
+        if (rowCapacity > 5 || colCapacity > 10) {
+            System.err.println("Row Capacity Limit: 5. Col Capacity Limit: 10");
+            System.exit(0);
+        }
         this.startTime = startTime;
         this.rowCapacity = rowCapacity;
         this.colCapacity = colCapacity;
@@ -44,9 +48,12 @@ public class ShowTime {
         return movie;
     }
 
-    public void addSeat(Seat s) {
-        if (s.getRow() < rowCapacity && s.getCol() < colCapacity)
-            seatList.add(s);
+    public void createSeats() {
+        for (int i = 0; i < rowCapacity; i++) {
+            for (int j = 0; j < colCapacity; j++) {
+                seatList.add(new Seat(i, j, 20, this));
+            }
+        }
     }
 
     @Override

@@ -22,8 +22,7 @@ public class EmailManager {
         System.out.println("\n----------------------------------");
         System.out.println("To: " + email);
         System.out.println("Subject: Ticket Cancellation");
-        System.out.println("This is your Coupon ID for the cancelled Ticket: ");
-        System.out.println(coupon.getCouponID());
+        System.out.println("This is your Coupon ID for the cancelled Ticket: " + coupon.getCouponID());
         System.out.println("Redeem this Coupon when purchasing a ticket to get a reduced price!");
         System.out.println("----------------------------------\n");
     }
