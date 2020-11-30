@@ -156,7 +156,7 @@ public class CancelTicketView extends javax.swing.JPanel {
                                                                                 62,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(112, 112, 112)));
-        }// </editor-fold>
+        }
 
         /**
          * The method addCancelListener will take in an ActionListener as an argument and assign it to the 

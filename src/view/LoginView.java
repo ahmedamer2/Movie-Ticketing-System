@@ -125,7 +125,7 @@ public class LoginView extends javax.swing.JPanel {
                                                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addContainerGap(74, Short.MAX_VALUE)));
-        }// </editor-fold>
+        }
         /**
          * The addLoginListener method will take in an ActionListener as an argument that will be used to listen for the user to 
          * click on the loginButton.
