@@ -146,4 +146,16 @@ public class DBManager {
     public ArrayList<Ticket> getTickets() {
         return tickets;
     }
+
+    public void populateSeats(TicketController tc) {
+        // Randomly Populating Seats to better reflect real life
+        for (Movie m : movies) {
+            for (ShowTime st : m.getShowTimeList()) {
+                if (m.isReleased())
+                    Randomizer.populateRandomSeats(st.getSeatList(), tc, 50);
+                else
+                    Randomizer.populateRandomSeats(st.getSeatList(), tc, 10);
+            }
+        }
+    }
 }

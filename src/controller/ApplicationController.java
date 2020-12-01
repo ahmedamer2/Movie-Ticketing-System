@@ -31,6 +31,7 @@ public class ApplicationController {
         movieList = db.getMovies();
         vc = new MyViewController();
         currentUser = null;
+        db.populateSeats(tc);
     }
 
     public void login() {
@@ -150,7 +151,14 @@ public class ApplicationController {
     }
 
     public void browseSeats(ShowTime st) {
-        SeatView seatView = vc.createSeatView(st);
+        // If a movie is exclusive, check if 10% of the seats have been already
+        // purchased
+        boolean seatsAvailable = true;
+        if (!st.getMovie().isReleased()) {
+            seatsAvailable = tc.verifyExclusiveMovieAvailability(st);
+        }
+
+        SeatView seatView = vc.createSeatView(st, seatsAvailable);
 
         seatView.addBackListener((ActionEvent e) -> {
             browseShowtimes(st.getMovie());

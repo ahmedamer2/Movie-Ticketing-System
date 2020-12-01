@@ -85,9 +85,13 @@ public class MyViewController {
         return stView;
     }
 
-    public SeatView createSeatView(ShowTime st) {
+    public SeatView createSeatView(ShowTime st, boolean seatsAvailable) {
         removeCurrentPanel();
-        SeatView seatView = new SeatView(st);
+        if (!seatsAvailable) {
+            displayMessage(
+                    "Note: This exclusive movie has 10% of its seats sold. \nUnfortunately, you cannot purchase any more seats before the movie's release");
+        }
+        SeatView seatView = new SeatView(st, seatsAvailable);
         currentPanel = seatView;
         mainFrame.add(seatView);
         mainFrame.pack();

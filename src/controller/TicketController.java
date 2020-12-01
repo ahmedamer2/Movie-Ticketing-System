@@ -23,6 +23,20 @@ public class TicketController {
         return ticket;
     }
 
+    public boolean verifyExclusiveMovieAvailability(ShowTime st) {
+        ArrayList<Seat> seatList = st.getSeatList();
+        int seatsPurchased = 0;
+        for (Seat s : seatList) {
+            if (!s.isAvailable()) {
+                seatsPurchased++;
+            }
+        }
+
+        if ((double) seatsPurchased / seatList.size() > 0.1)
+            return false;
+        return true;
+    }
+
     public boolean verifyCancellation(Ticket t) {
         long time_diff = Math.abs(Duration.between(LocalDateTime.now(), t.getIssueDate()).toHours());
 
