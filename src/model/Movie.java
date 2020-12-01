@@ -61,7 +61,7 @@ public class Movie {
     }
 
     /**
-     * setter the function used to set the title of the Movie to the title of type String
+     * setter function used to set the title of the Movie to the title of type String
      * which is passed as an argument
      * @param title String representing the title of the Movie
      */
@@ -70,46 +70,77 @@ public class Movie {
     }
 
     /**
-     * 
-     * @return returns String 
+     * getter function used to get the genre of the Movie
+     * @return returns String representing the genre of the Movie
      */
     public String getGenre() {
         return genre;
     }
 
     /**
-     * setter the function used to set the title of the Movie to the title of type String
+     * setter function which sets the genre of the Movie to the genre of type String
      * which is passed as an argument
-     * @param genre String representing the title of the Movie
+     * @param genre String representing the genre of the Movie
      */
     public void setGenre(String genre) {
         this.genre = genre;
     }
-
+    
+    /**
+     * getter function which gets the synopsys of the Movie
+     * @return returns String representing the synopsys of the Movie
+     */
     public String getSynopsys() {
         return synopsys;
     }
 
+    /**
+     * setter function used to set the synopys of the Movie to the synopys of type String which
+     * is passed as an argument  
+     * @param synopsys String representing the desired synopys to be set for the Movie 
+     */
     public void setSynopsys(String synopsys) {
         this.synopsys = synopsys;
     }
 
+    /**
+     * getter function used to get the poster of the Movie
+     * @return returns poster of type ImageIcon representing the poster of the Movie
+     */
     public ImageIcon getPoster() {
         return poster;
     }
 
+    /**
+     * setter function which sets the poster of the Movie as the newPoster which is passed as an argument 
+     * @param newPoster ImageIcon representing the desired poster for the Movie
+     */
     public void setPoster(ImageIcon newPoster) {// add from loaded image
         poster = newPoster;
     }
 
+    /**
+     * setter function used to set the location of the poster of the Movie to the newPosterLocation 
+     * which is passed as an argument
+     * @param newPosterLocation String representing the location where the poster of the Movie is present.
+     */
     public void setPoster(String newPosterLocation) {// add from file system
         poster = new ImageIcon(newPosterLocation);
     }
 
+    /**
+     * getter function used to get the ArrayList of ShowTime(s) for the Movie
+     * @return returns ArrayList representing the list of all the ShowTime(s) of the Movie
+     */
     public ArrayList<ShowTime> getShowTimeList() {
         return showTimeList;
     }
 
+    /**
+     * this function is used for adding a ShowTime of the Movie to the showTimeList 
+     * which represents list of all the ShowTime(s)
+     * @param st this is an object of type ShowTime representing the show time for the Movie
+     */
     public void addShowTime(ShowTime st) {
         showTimeList.add(st);
         if (showTimeList.size() > 10) {
@@ -119,6 +150,10 @@ public class Movie {
     }
 
     @Override
+    /**
+     * This function is used to get the title and genre of the Movie 
+     * @return returns a String representing the title and genre of the movie
+     */
     public String toString() {
         return title + ", " + genre;
     }
