@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -15,11 +14,22 @@ import model.Ticket;
 import model.Seat;
 import model.ShowTime;
 
-public class MyViewController {
+/**
+ * This class manages all the front end views and creates them for the
+ * application controller to user
+ * 
+ * @author Ahmed Amer, Yassin Bayoumy, Bikramjeet Singh Atwal
+ * @version 1.0
+ * @since November 30, 2020
+ */
+public class ViewController {
     JFrame mainFrame;
     JPanel currentPanel = null;
 
-    public MyViewController() {
+    /**
+     * contructor for the View Controller. Sets up the main frame
+     */
+    public ViewController() {
         mainFrame = new JFrame();
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setTitle("Ticket Registration System");
@@ -27,10 +37,20 @@ public class MyViewController {
         mainFrame.setVisible(true);
     }
 
+    /**
+     * displays a pop-up message to the user
+     * 
+     * @param msg the message to display
+     */
     public void displayMessage(String msg) {
         JOptionPane.showMessageDialog(mainFrame, msg);
     }
 
+    /**
+     * creates the register view
+     * 
+     * @return the register view that was create
+     */
     public RegisterView createRegisterView() {
         removeCurrentPanel();
         RegisterView register = new RegisterView();
@@ -40,6 +60,13 @@ public class MyViewController {
         return register;
     }
 
+    /**
+     * creates the purchase ticket view
+     * 
+     * @param s            the seat being purchased
+     * @param isRegistered flag showing if the user is registered
+     * @return the purchase ticket view that was create
+     */
     public PurchaseTicketView createPurchaseTicketView(Seat s, boolean isRegistered) {
         removeCurrentPanel();
         PurchaseTicketView purchaseView = new PurchaseTicketView(s, isRegistered);
@@ -49,6 +76,13 @@ public class MyViewController {
         return purchaseView;
     }
 
+    /**
+     * creates the cancel ticket view
+     * 
+     * @param t            the ticket to cancel
+     * @param isRegistered flag showing if the user is registered
+     * @return the cancel ticket view that was create
+     */
     public CancelTicketView createCancelTicketView(Ticket t, boolean isRegistered) {
         removeCurrentPanel();
         CancelTicketView cancelView = new CancelTicketView(t, isRegistered);
@@ -58,6 +92,11 @@ public class MyViewController {
         return cancelView;
     }
 
+    /**
+     * creates the ticket search view
+     * 
+     * @return the ticket search view that was create
+     */
     public TicketSearchView createTicketSearchView() {
         removeCurrentPanel();
         TicketSearchView searchView = new TicketSearchView();
@@ -67,6 +106,12 @@ public class MyViewController {
         return searchView;
     }
 
+    /**
+     * creates the main app view that is seen after logging in
+     * 
+     * @param u the user that is logged in
+     * @return the register view that was create
+     */
     public MainAppView createAppView(RegisteredUser u) {
         removeCurrentPanel();
         MainAppView app = new MainAppView(u);
@@ -76,6 +121,12 @@ public class MyViewController {
         return app;
     }
 
+    /**
+     * creates the showtime view using the specific movie information
+     * 
+     * @param movie the movie to use to display showtimes
+     * @return the showtime view that was create
+     */
     public ShowTimeView createShowTimeView(Movie movie) {
         removeCurrentPanel();
         ShowTimeView stView = new ShowTimeView(movie);
@@ -85,6 +136,14 @@ public class MyViewController {
         return stView;
     }
 
+    /**
+     * creates the seat view using the specific showtime information
+     * 
+     * @param st             the showtime to use to display the seats
+     * @param seatsAvailable flag used to address an exclusive movie that has a 10%
+     *                       capacity
+     * @return the seat view that was create
+     */
     public SeatView createSeatView(ShowTime st, boolean seatsAvailable) {
         removeCurrentPanel();
         if (!seatsAvailable) {
@@ -98,6 +157,13 @@ public class MyViewController {
         return seatView;
     }
 
+    /**
+     * creates the movie view using the movie information
+     * 
+     * @param movies       the list of movies to display
+     * @param isRegistered flag to show exclusive movies to registered users
+     * @return the showtime view that was create
+     */
     public MovieView createMovieView(ArrayList<Movie> movies, boolean isRegistered) {
         removeCurrentPanel();
         MovieView movieView = new MovieView(movies, isRegistered);
@@ -107,6 +173,11 @@ public class MyViewController {
         return movieView;
     }
 
+    /**
+     * The main view which displays the login options for the user
+     * 
+     * @return The view that was created
+     */
     public MainView createMainView() {
         removeCurrentPanel();
         MainView main = new MainView();
@@ -116,6 +187,11 @@ public class MyViewController {
         return main;
     }
 
+    /**
+     * creates the login view
+     * 
+     * @return the login view that was created
+     */
     public LoginView createLoginView() {
         removeCurrentPanel();
         LoginView loginView = new LoginView();
@@ -125,6 +201,9 @@ public class MyViewController {
         return loginView;
     }
 
+    /**
+     * removes the current view being displayed
+     */
     public void removeCurrentPanel() {
         if (currentPanel != null)
             mainFrame.remove(currentPanel);

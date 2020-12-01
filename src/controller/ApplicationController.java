@@ -12,6 +12,14 @@ import java.awt.event.MouseListener;
 import view.*;
 import model.*;
 
+/**
+ * This is the main controller that manages all other controllers and ties the
+ * backend with the frontend
+ * 
+ * @author Ahmed Amer, Yassin Bayoumy, Bikramjeet Singh Atwal
+ * @version 1.0
+ * @since November 30, 2020
+ */
 public class ApplicationController {
     TicketController tc;
     PaymentManager pm;
@@ -19,9 +27,13 @@ public class ApplicationController {
     AuthenticationSystem auth;
     ArrayList<Movie> movieList;
     RegisteredUser currentUser;
-    MyViewController vc;
+    ViewController vc;
     final String theatreCardNumber = "1234567812345678";
 
+    /**
+     * Constructor for the Application Controller, initializes all other controllers
+     * using the DBManager.
+     */
     public ApplicationController() {
         DBManager db = DBManager.getInstance();
         tc = new TicketController(db.getTickets(), db.getCoupons());
@@ -29,11 +41,14 @@ public class ApplicationController {
         em = new EmailManager();
         auth = new AuthenticationSystem();
         movieList = db.getMovies();
-        vc = new MyViewController();
+        vc = new ViewController();
         currentUser = null;
         db.populateSeats(tc);
     }
 
+    /**
+     * Shows the Login view and sets up its ActionListeners
+     */
     public void login() {
         LoginView login = vc.createLoginView();
 
@@ -60,6 +75,9 @@ public class ApplicationController {
         });
     }
 
+    /**
+     * Shows the Register view and sets up its ActionListeners
+     */
     public void register() {
         RegisterView register = vc.createRegisterView();
 
@@ -89,6 +107,9 @@ public class ApplicationController {
         });
     }
 
+    /**
+     * Shows the Entry Page of the app
+     */
     public void appEntry() {
         MainView main = vc.createMainView();
 
@@ -105,6 +126,9 @@ public class ApplicationController {
         });
     }
 
+    /**
+     * Displays the Movie View and sets up ActionListeners for every Movie
+     */
     public void browseMovies() {
         MovieView movieView = vc.createMovieView(movieList, currentUser != null);
 
@@ -129,6 +153,11 @@ public class ApplicationController {
         movieView.addMovieListners(events);
     }
 
+    /**
+     * Displays the ShowTime View and sets up ActionListeners for every ShowTime
+     * 
+     * @param selectedMovie Display this movie's showtimes
+     */
     public void browseShowtimes(Movie selectedMovie) {
         ShowTimeView stView = vc.createShowTimeView(selectedMovie);
 
@@ -150,6 +179,11 @@ public class ApplicationController {
         stView.addShowTimeListeners(events);
     }
 
+    /**
+     * Displays the Seat View and sets up ActionListeners for every Seat
+     * 
+     * @param st Display this showtime's seats
+     */
     public void browseSeats(ShowTime st) {
         // If a movie is exclusive, check if 10% of the seats have been already
         // purchased
@@ -178,6 +212,11 @@ public class ApplicationController {
         seatView.addSeatListeners(events);
     }
 
+    /**
+     * Displays the Cancel Ticket Confirmation page
+     * 
+     * @param t the ticket being cancelled
+     */
     public void cancelTicket(Ticket t) {
         CancelTicketView view = vc.createCancelTicketView(t, currentUser != null);
 
@@ -204,6 +243,9 @@ public class ApplicationController {
 
     }
 
+    /**
+     * Displays the View to search for a ticket before cancellation
+     */
     public void searchTicket() {
         TicketSearchView view = vc.createTicketSearchView();
 
@@ -229,6 +271,12 @@ public class ApplicationController {
         });
     }
 
+    /**
+     * Displays the Purchase Ticket page and set's up logic for purchasing
+     * 
+     * @param s            the seat being purchased
+     * @param isRegistered flag to indicate if the user is registered
+     */
     public void purchaseTicket(Seat s, boolean isRegistered) {
         PurchaseTicketView view = vc.createPurchaseTicketView(s, isRegistered);
 
@@ -284,6 +332,9 @@ public class ApplicationController {
 
     }
 
+    /**
+     * Displays the Main App view after logging in
+     */
     public void mainAppView() {
         MainAppView app = vc.createAppView(currentUser);
 
