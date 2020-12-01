@@ -254,7 +254,7 @@ public class DBManager {
                 if (m.isReleased())
                     Randomizer.populateRandomSeats(st.getSeatList(), tc, 50);
                 else
-                    Randomizer.populateRandomSeats(st.getSeatList(), tc, 10);
+                    Randomizer.populateRandomSeats(st.getSeatList(), tc, 9);
             }
         }
     }
