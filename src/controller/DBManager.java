@@ -3,6 +3,9 @@ package controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.swing.ImageIcon;
+
 import model.*;
 
 /**
@@ -56,12 +59,12 @@ public class DBManager {
         creditCards = new HashMap<Integer, Double>();
 
         movies = new ArrayList<Movie>();
-        movies.add(new Movie("Avengers Endgame", "Action", "Superheros fight", "src\\Images\\poster1.jpg"));
-        movies.add(new Movie("Black Panther", "Action", "Wakanda Forever!", "src\\Images\\poster2.jpg"));
-        movies.add(new Movie("Joker", "Thriller", "Joker's story", "src\\Images\\poster3.jpg"));
-        movies.add(new Movie("Star Wars", "Action", "idk", "src\\Images\\poster4.jpg"));
-        movies.add(new Movie("Ironman", "Action", "Tony Stark is cool", "src\\Images\\poster5.jpg"));
-        movies.add(new Movie("Guardians of the Galaxy: V2", "Action", "I am Groot", "src\\Images\\poster6.jpg"));
+        movies.add(new Movie("Avengers Endgame", "Action", "Superheros fight", new ImageIcon(getClass().getClassLoader().getResource("poster1.jpg"))));
+        movies.add(new Movie("Black Panther", "Action", "Wakanda Forever!", new ImageIcon(getClass().getClassLoader().getResource("poster2.jpg"))));
+        movies.add(new Movie("Joker", "Thriller", "Joker's story", new ImageIcon(getClass().getClassLoader().getResource("poster3.jpg"))));
+        movies.add(new Movie("Star Wars", "Action", "idk", new ImageIcon(getClass().getClassLoader().getResource("poster4.jpg"))));
+        movies.add(new Movie("Ironman", "Action", "Tony Stark is cool", new ImageIcon(getClass().getClassLoader().getResource("poster5.jpg"))));
+        movies.add(new Movie("Guardians of the Galaxy: V2", "Action", "I am Groot", new ImageIcon(getClass().getClassLoader().getResource("poster6.jpg"))));
 
         movies.get(0).releaseMovie();
         movies.get(1).releaseMovie();

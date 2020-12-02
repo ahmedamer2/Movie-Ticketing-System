@@ -25,12 +25,12 @@ public class Movie {
      * @param synopsys String representing the synopsys(summary) of the Movie
      * @param posterLocation String representing the locaton where the poster(image) of Movie is stored
      */
-    public Movie(String title, String genre, String synopsys, String posterLocation) {
+    public Movie(String title, String genre, String synopsys, ImageIcon poster) {
         this.title = title;
         this.genre = genre;
         this.synopsys = synopsys;
         isReleased = false;
-        poster = new ImageIcon(posterLocation);
+        this.poster = poster;
         showTimeList = new ArrayList<ShowTime>();
     }
 

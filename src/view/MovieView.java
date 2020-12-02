@@ -151,7 +151,7 @@ public class MovieView extends JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(imageScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)));
 
-        ImageIcon back = new ImageIcon("src\\Images\\backButton.png");
+        ImageIcon back = new ImageIcon(getClass().getClassLoader().getResource("backButton.png"));
         image_scaler(back, backButton, 30, 30);
 
     }
